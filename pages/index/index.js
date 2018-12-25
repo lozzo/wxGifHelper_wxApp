@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+const { $Toast } = require('../../ui/iview/dist/base/index');
 Page({
   data: {
     motto: 'Hello World',
@@ -9,10 +9,16 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     gifs:[],
-    windowHeight:456
+    windowHeight:456,
+    lodingOk:false,
+    firstLoad:true
   },
-  //事件处理函数
-
+  onPullDownRefresh(){
+    console.log("-----")
+    this.getGifs()
+    wx.stopPullDownRefresh();
+  },
+//事件处理函数
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
@@ -55,6 +61,13 @@ Page({
   },
   getGifs:function(){
     self = this
+    self.setData({
+      lodingOk:false,
+    })
+    $Toast({
+      content: '加载中',
+      type: 'loading'
+  });
     wx.request(
       {
         url:"https://tg.onemoresec.com/wx/rand",
@@ -63,7 +76,8 @@ Page({
           if (res.statusCode == 200){
               let images = res.data.gifs.map(function(i){return "http://tg-gif.oss-cn-hangzhou.aliyuncs.com/"+i+"?x-oss-process=image/format,jpg" })
               self.setData({
-                gifs:images
+                gifs:images,
+                lodingOk:true
               })
           }
         }
@@ -84,4 +98,5 @@ Page({
       complete: function(res) {},
     })
   }
+
 })

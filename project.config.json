@@ -10,7 +10,8 @@
 		"minified": true,
 		"newFeature": true,
 		"autoAudits": false,
-		"uglifyFileName": true
+		"uglifyFileName": true,
+		"nodeModules": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.4.3",

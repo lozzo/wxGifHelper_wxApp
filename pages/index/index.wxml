@@ -1,5 +1,6 @@
 <view>
-  <scroll-view enable-back-to-top scroll-y style="height: {{windowHeight}}px;">
+  <i-toast id="toast" />
+  <scroll-view enable-back-to-top scroll-y style="height: {{windowHeight}}px;" >
     <view class="wrapper">
     <view wx:for="{{gifs}}" wx:key="index" class="cell">
       <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg' lazy-load="true" mode="aspectFit"></image>
