@@ -1,0 +1,26 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/bindTg/bindTg"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "随机"
+      },
+      {
+        "pagePath": "pages/bindTg/bindTg",
+        "text": "我的"
+      }
+    ],
+    "color": "#33CCFF",
+    "selectedColor": "#FF3300"
+  }
+}
