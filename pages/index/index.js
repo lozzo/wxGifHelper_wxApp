@@ -13,8 +13,7 @@ Page({
     lodingOk:false,
     firstLoad:true
   },
-  onPullDownRefresh(){
-    console.log("-----")
+  onPullDownRefresh:function(){
     this.getGifs()
     wx.stopPullDownRefresh();
   },
