@@ -1,5 +1,6 @@
 <!-- index.wxml -->
 <view class="container">
+<i-toast id="toast" />
   <view class="userinfo">
     <button wx:if="{{!canGetInfo}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
       登录
@@ -12,7 +13,7 @@
         <button bind:tap="unBindTg" type="info">解除绑定</button>
       </view>
       <block wx:else>
-        <i-input bind:blur="Binput" value="{{ vinputTgID }}" type="number" right title="TelegramID" mode="normal" placeholder="Tg BOT /bind 命令获取" />
+        <input bindinput="Binput" value="{{ vinputTgID }}" type="number" right title="TelegramID" mode="normal" placeholder="Tg BOT /bind 命令获取" />
         <button bind:tap="bindTg" type="info">绑定</button>
       </block>
     </block>

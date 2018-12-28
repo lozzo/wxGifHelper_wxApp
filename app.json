@@ -1,7 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/bindTg/bindTg"
+    "pages/bindTg/bindTg",
+    "pages/mygifs/mygifs"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -16,8 +17,12 @@
         "text": "随机"
       },
       {
-        "pagePath": "pages/bindTg/bindTg",
+        "pagePath": "pages/mygifs/mygifs",
         "text": "我的"
+      },
+      {
+        "pagePath": "pages/bindTg/bindTg",
+        "text": "设置"
       }
     ],
     "color": "#33CCFF",

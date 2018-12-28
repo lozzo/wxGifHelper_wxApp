@@ -1,0 +1,10 @@
+<view>
+  <i-toast id="toast" />
+  <view>
+    <view class="wrapper">
+    <view wx:for="{{gifs}}" wx:key="index" class="cell">
+      <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg' lazy-load="true" mode="aspectFit"></image>
+    </view>
+    </view>
+  </view>
+</view>

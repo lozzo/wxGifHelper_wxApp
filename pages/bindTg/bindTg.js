@@ -1,5 +1,8 @@
 //获取应用实例
 const app = getApp()
+const {
+  $Toast
+} = require('../../ui/iview/dist/base/index');
 
 Page({
   data: {
@@ -14,7 +17,8 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        canGetInfo: true
+        canGetInfo: true,
+        tgID:app.globalData.tgID
       })
     } else if (this.data.canIUse) {
       app.userInfoReadyCallback = res => {
@@ -35,7 +39,9 @@ Page({
       })
     }
   if (this.data.canGetInfo){
+    if (app.globalData.JwtToken == "" || parseInt(new Date().getTime()) - app.globalData.TokenDate >3600){
     this.tgLogin(app.globalData.userInfo.nickName)
+    }
   }
   },
   tgLogin: function(nickName) {
@@ -57,6 +63,11 @@ Page({
                 tgID: res.data.tgID,
                 canGetInfo: true
               })
+            }else{
+              $Toast({
+                content: '登录失败',
+                type: 'error'
+              });
             }
           }
         })
@@ -78,6 +89,11 @@ Page({
             self.setData({
               tgID:parseInt(self.data.vinputTgID)
             })
+        }else{
+          $Toast({
+            content: '请求错误',
+            type: 'error'
+          });
         }
       }
     })
@@ -94,7 +110,6 @@ Page({
         this.setData({
           tgID:0
         })
-
       }
     })
   },
@@ -107,9 +122,9 @@ Page({
     })
   },
   Binput:function(e){
-    console.log(e.detail.detail.value)
+    console.log(e.detail.value)
     this.setData({
-      vinputTgID:e.detail.detail.value
+      vinputTgID:e.detail.value
     })
   },
   xx:e=>{
