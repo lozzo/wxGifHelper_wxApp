@@ -1,5 +1,8 @@
-{"usingComponents": {
-    "i-grid": "../../ui/iview/dist/grid/index",
-    "i-grid-item": "../../ui/iview/dist/grid-item/index"
-}
+{
+    "usingComponents": {
+        "i-toast": "../../ui/iview/dist/toast/index",
+        "i-input": "../../ui/iview/dist/input/index",
+        "i-button": "../../ui/iview/dist/button/index"
+    },
+    "enablePullDownRefresh":true
 }

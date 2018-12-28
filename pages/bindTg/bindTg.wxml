@@ -1,15 +1,21 @@
-<!--index.wxml-->
+<!-- index.wxml -->
 <view class="container">
   <view class="userinfo">
-
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">  </button>
+    <button wx:if="{{!canGetInfo}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+      登录
+    </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view wx:if="{{tgID!=0}}">
+        <text  class="userinfo-nickname">TelegramID: {{tgID}}</text>
+        <button bind:tap="unBindTg" type="info">解除绑定</button>
+      </view>
+      <block wx:else>
+        <i-input bind:blur="Binput" value="{{ vinputTgID }}" type="number" right title="TelegramID" mode="normal" placeholder="Tg BOT /bind 命令获取" />
+        <button bind:tap="bindTg" type="info">绑定</button>
+      </block>
     </block>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+  <view wx:if="{{islogin}}"></view>
 </view>

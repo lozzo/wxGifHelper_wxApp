@@ -1,29 +1,22 @@
-//index.js
 //获取应用实例
 const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    canGetInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    islogin: false,
+    tgID: 0,
+    vinputTgID: "",
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        canGetInfo: true
       })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
+    } else if (this.data.canIUse) {
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
@@ -31,7 +24,6 @@ Page({
         })
       }
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
@@ -42,13 +34,86 @@ Page({
         }
       })
     }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+  if (this.data.canGetInfo){
+    this.tgLogin(app.globalData.userInfo.nickName)
   }
+  },
+  tgLogin: function(nickName) {
+    self = this
+    wx.login({
+      success: resp => {
+        wx.request({
+          url: "https://wx.gifhelper.club/wx/login?jscode=" + resp.code + "&nickName=" + nickName,
+          method: "GET",
+          success: function (res) {
+            if (res.statusCode == 200) {
+              app.globalData.JwtToken = res.data.token
+              app.globalData.tgID = res.data.tgID
+              app.globalData.userID = res.data.userID
+              app.globalData.TokenDate = parseInt(new Date().getTime())
+              console.log("wx_data:", res.data)
+              self.setData({
+                islogin: true,
+                tgID: res.data.tgID,
+                canGetInfo: true
+              })
+            }
+          }
+        })
+      }
+    })
+  },
+  bindTg: function () {
+    console.log("bingtg :", this.data.vinputTgID)
+    self = this
+    wx.request({
+      url: "https://wx.gifhelper.club/wx/bingtg?tgID=" + self.data.vinputTgID,
+      method: "GET",
+      header: {
+        Authorization: app.globalData.JwtToken
+      },
+      success: res => {
+        console.log("bingtg :", res.statusCode)
+        if (res.statusCode == 200){
+            self.setData({
+              tgID:parseInt(self.data.vinputTgID)
+            })
+        }
+      }
+    })
+  },
+  unBindTg: function () {
+    wx.request({
+      url: "https://wx.gifhelper.club/wx/UnBindTg",
+      method: "GET",
+      header: {
+        Authorization: app.globalData.JwtToken
+      },
+      success: res => {
+        app.globalData.tgID = 0
+        this.setData({
+          tgID:0
+        })
+
+      }
+    })
+  },
+  bindGetUserInfo:function(e){
+    console.log(e.detail.userInfo)
+    var nickname = e.detail.userInfo.nickName
+    this.tgLogin(nickname)
+    this.setData({
+      userInfo:e.detail.userInfo
+    })
+  },
+  Binput:function(e){
+    console.log(e.detail.detail.value)
+    this.setData({
+      vinputTgID:e.detail.detail.value
+    })
+  },
+  xx:e=>{
+    console.log(e)
+  }
+
 })

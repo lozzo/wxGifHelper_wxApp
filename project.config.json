@@ -4,18 +4,18 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+		"nodeModules": true,
 		"autoAudits": false,
-		"uglifyFileName": true,
-		"nodeModules": true
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.3",
-	"appid": "wx9c99c5a8bd35ddc7",
+	"libVersion": "2.2.4",
+	"appid": "wx9876b9977be5783f",
 	"projectname": "tg_gif",
 	"debugOptions": {
 		"hidedInDevtools": []
