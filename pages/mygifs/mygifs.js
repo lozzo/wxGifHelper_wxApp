@@ -1,13 +1,22 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const {
-  $Toast
-} = require('../../ui/iview/dist/base/index');
+const {$Toast} = require('../../ui/iview/dist/base/index');
+const { $Message } = require('../../ui/iview/dist/base/index');
 Page({
   data: {
     gifs:[],
-    lodingOk:false
+    lodingOk:false,
+    actions: [
+      {
+        name: '确定删除了',
+        color: '#ed3f14'
+      }
+    ],
+    delete_file:{
+      id:"",
+      index:""
+    }
   },
   onPullDownRefresh: function() {
     this.getFiles()
@@ -92,4 +101,51 @@ Page({
       complete: function(res) {},
     })
   },
+  handleCancel:function(){
+    this.setData({
+      visible: false
+    });
+  },
+  Prdelete:function(e){
+    var index = e.currentTarget.dataset.index;
+    var imgArr = this.data.gifs;
+    console.log(imgArr[index])
+    this.setData({
+      visible: true,
+      delete_file:{id:imgArr[index].split(".com/")[1],
+        index:index}
+    });
+  },
+  handleClickItem:function(e){
+    self = this
+    let delete_ok = "https://tg-gif.oss-cn-hangzhou.aliyuncs.com/delete_ok.jpg"
+    var imgArr = this.data.gifs;
+    console.log(this.data.report_index)
+    wx.request({
+      url:"https://wy.kar98k.club/wx/DeleteUserFile?id="+self.data.delete_file.id+"&ask="+app.globalData.userID,
+      header: {
+        Authorization: app.globalData.JwtToken
+      },
+      success:res=>{
+        if (res.statusCode == 200){
+          imgArr[self.data.delete_file.index] = delete_ok
+          this.setData({
+            visible: false,
+            gifs:imgArr
+        });
+        $Message({
+            content: '删除成功',
+            type: 'success'
+        });
+        }
+      },
+      fail:res=>{
+        $Message({
+          content: '失败',
+          type: 'error'
+      });
+      }
+    })
+  }
+
 })

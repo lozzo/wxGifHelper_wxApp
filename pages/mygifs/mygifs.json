@@ -1,6 +1,8 @@
 {
     "usingComponents": {
-        "i-toast": "../../ui/iview/dist/toast/index"
+        "i-toast": "../../ui/iview/dist/toast/index",
+        "i-action-sheet": "../../ui/iview/dist/action-sheet/index",
+        "i-message": "../../ui/iview/dist/message/index"
     },
     "enablePullDownRefresh":true
 }

@@ -3,8 +3,15 @@
   <view>
     <view class="wrapper">
     <view wx:for="{{gifs}}" wx:key="index" class="cell">
-      <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg' lazy-load="true" mode="aspectFit"></image>
+      <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg'   bindlongpress="Prdelete" lazy-load="true" mode="aspectFit"></image>
     </view>
     </view>
   </view>
+  <i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" mask-closable="{{ false }}">
+    <view slot="header" style="padding: 16px">
+        <view style="color: #444;font-size: 16px">真的要删除吗?</view>
+        <text>其实删除了还能在发送回来</text>
+    </view>
+</i-action-sheet>
+  <i-message id="message" />
 </view>

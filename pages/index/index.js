@@ -148,10 +148,16 @@ Page({
             gifs:imgArr
         });
         $Message({
-            content: 'ojbk',
+            content: '成功举报',
             type: 'success'
         });
         }
+      },
+      fail:res=>{
+        $Message({
+          content: '失败',
+          type: 'error'
+      });
       }
     })
   }
