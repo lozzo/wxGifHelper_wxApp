@@ -77,6 +77,13 @@ Page({
   bindTg: function () {
     console.log("bingtg :", this.data.vinputTgID)
     self = this
+    if (this.data.vinputTgID == ""){
+      $Toast({
+        content: '请输入Tg ID',
+        type: 'error'
+      });
+      return
+    }
     wx.request({
       url: "https://wx.gifhelper.club/wx/bingtg?tgID=" + self.data.vinputTgID,
       method: "GET",
@@ -91,7 +98,7 @@ Page({
             })
         }else{
           $Toast({
-            content: '请求错误',
+            content: '请求错误: '+res.statusCode,
             type: 'error'
           });
         }

@@ -3,8 +3,16 @@
   <view>
     <view class="wrapper">
     <view wx:for="{{gifs}}" wx:key="index" class="cell">
-      <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg' lazy-load="true" mode="aspectFit"></image>
+      <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg' bindlongpress="Report" lazy-load="true" mode="aspectFit"></image>
     </view>
     </view>
   </view>
+<i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" mask-closable="{{ false }}">
+    <view slot="header" style="padding: 16px">
+        <view style="color: #444;font-size: 16px">要来一发举报吗？</view>
+        <text>毕竟我也不想这个小程序被搞砸</text>
+    </view>
+</i-action-sheet>
+
+<i-message id="message" />
 </view>

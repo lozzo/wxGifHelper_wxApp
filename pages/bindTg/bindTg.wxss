@@ -17,5 +17,14 @@
   }
   
   .usermotto {
-    margin-top: 200px;
+    margin-top: 100px;
+  }
+  .notice_text{
+    padding:0 20px;
+    font-size:14px;
+    line-height:28px;
+    color:#999;
+  }
+  .container{
+    padding:50rpx 0;
   }

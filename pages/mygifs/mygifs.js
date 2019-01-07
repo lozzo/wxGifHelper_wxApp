@@ -66,6 +66,7 @@ Page({
           let images = res.data.gifs.map(function(i) {
             return "http://tg-gif.oss-cn-hangzhou.aliyuncs.com/" + i
           })
+          // console.log(images)
           self.setData({
             gifs: images,
             lodingOk: true,

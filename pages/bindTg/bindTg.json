@@ -4,5 +4,5 @@
         "i-input": "../../ui/iview/dist/input/index",
         "i-button": "../../ui/iview/dist/button/index"
     },
-    "enablePullDownRefresh":true
+    "enablePullDownRefresh":false
 }
