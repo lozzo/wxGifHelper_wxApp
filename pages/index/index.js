@@ -81,7 +81,7 @@ Page({
       type: 'loading'
     });
     wx.request({
-      url: "https://wx.gifhelper.club/wx/rand",
+      url: "https://wy.kar98k.club/wx/rand",
       method: "GET",
       success: function (res) {
         if (res.statusCode == 200) {
