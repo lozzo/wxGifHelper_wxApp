@@ -120,7 +120,6 @@ Page({
     self = this
     let delete_ok = "https://tg-gif.oss-cn-hangzhou.aliyuncs.com/delete_ok.jpg"
     var imgArr = this.data.gifs;
-    console.log(this.data.report_index)
     wx.request({
       url:"https://wy.kar98k.club/wx/DeleteUserFile?id="+self.data.delete_file.id+"&ask="+app.globalData.userID,
       header: {

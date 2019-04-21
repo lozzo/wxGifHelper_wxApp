@@ -3,7 +3,7 @@
   <view>
     <view class="wrapper">
     <view wx:for="{{gifs}}" wx:key="index" class="cell">
-      <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg' bindlongpress="Report" lazy-load="true" mode="aspectFit"></image>
+      <image class='img' src='{{item}}' data-index='{{index}}'   bindtap="multipleTap" bindlongtap="longTap" bindtouchstart="touchStart" bindtouchend="touchEnd" bindlongpress="Report" lazy-load="true" mode="aspectFit"></image>
     </view>
     </view>
   </view>
