@@ -12,7 +12,8 @@
         <view style="color: #444;font-size: 16px">要来一发举报吗？</view>
         <text>毕竟我也不想这个小程序被搞砸</text>
     </view>
+    
 </i-action-sheet>
-
+<ad unit-id="adunit-0f717a80334f5d0c"></ad>
 <i-message id="message" />
 </view>

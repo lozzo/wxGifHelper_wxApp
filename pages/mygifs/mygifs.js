@@ -35,7 +35,7 @@ Page({
     wx.login({
       success: resp => {
         wx.request({
-          url: "https://wy.kar98k.club/wx/login?jscode=" + resp.code + "&nickName=" + nickName,
+          url: "https://wy2.kar98k.club:8888/wx/login?jscode=" + resp.code + "&nickName=" + nickName,
           method: "GET",
           success: function (res) {
             if (res.statusCode == 200) {
@@ -50,6 +50,12 @@ Page({
                 type: 'error'
               });
             }
+          },
+          fail:res=>{
+            $Message({
+              content: '登录失败，请重新登录或检查网络',
+              type: 'error'
+          });
           }
         })
       }
@@ -65,7 +71,7 @@ Page({
       type: 'loading'
     });
     wx.request({
-      url: "https://wy.kar98k.club/wx/GetMyGifs?ask="+app.globalData.userID,
+      url: "https://wy2.kar98k.club:8888/wx/GetMyGifs?ask="+app.globalData.userID,
       method: "GET",
       header: {
         Authorization: app.globalData.JwtToken
@@ -84,6 +90,12 @@ Page({
           self.tgLogin(app.globalData.userInfo.nickName)
           self.getFiles()
         }
+      },
+      fail:res=>{
+        $Message({
+          content: '获取收藏表情失败，请登录或检查网络',
+          type: 'error'
+      });
       }
     })
   },
@@ -121,7 +133,7 @@ Page({
     let delete_ok = "https://tg-gif.oss-cn-hangzhou.aliyuncs.com/delete_ok.jpg"
     var imgArr = this.data.gifs;
     wx.request({
-      url:"https://wy.kar98k.club/wx/DeleteUserFile?id="+self.data.delete_file.id+"&ask="+app.globalData.userID,
+      url:"https://wy2.kar98k.club:8888/wx/DeleteUserFile?id="+self.data.delete_file.id+"&ask="+app.globalData.userID,
       header: {
         Authorization: app.globalData.JwtToken
       },

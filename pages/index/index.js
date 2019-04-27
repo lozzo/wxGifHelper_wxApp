@@ -68,7 +68,6 @@ Page({
     this.setData({
       windowHeight: app.globalData.windowHeight
     })
-
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -89,18 +88,27 @@ Page({
       type: 'loading'
     });
     wx.request({
-      url: "https://wy.kar98k.club/wx/rand",
+      url: "https://wy2.kar98k.club:8888/wx/rand",
       method: "GET",
       success: function (res) {
         if (res.statusCode == 200) {
           let images = res.data.gifs.map(function (i) {
-            return "http://tg-gif.oss-cn-hangzhou.aliyuncs.com/" + i
+            return "https://tg-gif.oss-cn-hangzhou.aliyuncs.com/" + i
           })
           self.setData({
             gifs: images,
             lodingOk: true
           })
         }
+      },
+      fail: res => {
+        $Message({
+          content: '获取随机表情失败',
+          type: 'error'
+        });
+        self.setData({
+          lodingOk: true
+        })
       }
     })
   },
@@ -190,7 +198,7 @@ Page({
     var imgArr = this.data.gifs;
     console.log(this.data.report_index)
     wx.request({
-      url:"https://wy.kar98k.club/wx/report?id="+self.data.reportID.id,
+      url:"https://wy2.kar98k.club:8888/wx/report?id="+self.data.reportID.id,
       success:res=>{
         if (res.statusCode == 200){
           imgArr[self.data.reportID.index] = delete_thanks
@@ -206,7 +214,7 @@ Page({
       },
       fail:res=>{
         $Message({
-          content: '失败',
+          content: '不举',
           type: 'error'
       });
       }
@@ -217,7 +225,7 @@ Page({
     var imgArr = this.data.gifs;
     var gifID = imgArr[index].split("/")[3]
     wx.request({
-      url: "https://wy.kar98k.club/wx/like?id=" + gifID + "&ask=" + app.globalData.userID,
+      url: "https://wy2.kar98k.club:8888/wx/like?id=" + gifID + "&ask=" + app.globalData.userID,
       header: {
         Authorization: app.globalData.JwtToken
       },
@@ -226,6 +234,11 @@ Page({
           $Message({
             content: '收藏成功',
             type: 'success'
+          });
+        }else if (res.statusCode == 401){
+          $Message({
+            content: '收藏失败,你可能尚未登录',
+            type: 'error'
           });
         }
       },

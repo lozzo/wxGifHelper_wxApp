@@ -49,7 +49,7 @@ Page({
     wx.login({
       success: resp => {
         wx.request({
-          url: "https://wy.kar98k.club/wx/login?jscode=" + resp.code + "&nickName=" + nickName,
+          url: "https://wy2.kar98k.club:8888/wx/login?jscode=" + resp.code + "&nickName=" + nickName,
           method: "GET",
           success: function (res) {
             if (res.statusCode == 200) {
@@ -85,7 +85,7 @@ Page({
       return
     }
     wx.request({
-      url: "https://wy.kar98k.club/wx/bingtg?tgID=" + self.data.vinputTgID,
+      url: "https://wy2.kar98k.club:8888/wx/bingtg?tgID=" + self.data.vinputTgID,
       method: "GET",
       header: {
         Authorization: app.globalData.JwtToken
@@ -107,7 +107,7 @@ Page({
   },
   unBindTg: function () {
     wx.request({
-      url: "https://wy.kar98k.club/wx/UnBindTg",
+      url: "https://wy2.kar98k.club:8888/wx/UnBindTg",
       method: "GET",
       header: {
         Authorization: app.globalData.JwtToken
@@ -117,6 +117,12 @@ Page({
         this.setData({
           tgID:0
         })
+      },
+      fail: res => {
+        $Message({
+          content: '解绑失败，请重试',
+          type: 'error'
+        });
       }
     })
   },

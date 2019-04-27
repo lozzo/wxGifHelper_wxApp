@@ -5,6 +5,7 @@
     <view wx:for="{{gifs}}" wx:key="index" class="cell">
       <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg'   bindlongpress="Prdelete" lazy-load="true" mode="aspectFit"></image>
     </view>
+    <ad unit-id="adunit-17f367be0d41f750"></ad>
     </view>
   </view>
   <i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" mask-closable="{{ false }}">

@@ -9,24 +9,30 @@
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
       <view wx:if="{{tgID!=0}}">
-        <text class="userinfo-nickname">TelegramID: {{tgID}}</text>
-        <button bind:tap="unBindTg" type="info">解除绑定</button>
-        <text class="notice_text" space="nbsp">
-          0:随即页面单击可以预览，双击可以收藏到自己的表情包内，长按可以以表情的方式发送给朋友。
-         1:解除绑定后在 "我的" 内仍能查看自己已经上传的表情,最多查看最近的201条,已上传而无法查看的,请重新上传
-         2:随机页面长按表情可以举报不合时宜的表情,举报后将被暂时屏蔽,我会尽可能快速恢复错误举报的表情,对经常上传不合时宜表情的用户予以封禁
+      <button type="info"  open-type="share" style='width:50%;margin-top:10px'>分享给好友</button>
+      <text class="notice_text" space="nbsp">
+        0:所有页面都是下拉刷新，广告只在每天第一次打开显示，如果可以，请帮忙点一下，赚点服务钱的钱，
+        1:单击表情后出现预览界面，然后长摁就能发送给好友，随机页面的表情，双击就能收藏到自己里面
+        2:自己的表情最多只能收藏201个（喂！很多好好吧，如果不够请反馈），如果你够耐心，能在随机页面刷出来的。
+        3:随机页面出现的不合时宜的表情，或者自己里面有不合时宜的表情，长按表情就能举报或者删除
         </text>
+        <text class="userinfo-nickname">TelegramID: {{tgID}}</text>
+        <button bind:tap="unBindTg" type="info" style='width:50%'>解除绑定</button>
       </view>
       <block wx:else>
-        <input bindinput="Binput" value="{{ vinputTgID }}" type="number" title="TelegramID" mode="normal" placeholder="点击此处输入Tg ID" />
-        <button bind:tap="bindTg" type="info">绑定</button>
+       <button type="info"  open-type="share" style='width:50%;margin-top:10px'>分享给好友</button>
         <text class="notice_text" space="nbsp">
-          0:随即页面单击可以预览，双击可以收藏到自己的表情包内（无需绑定），长按可以以表情的方式发送给朋友。
-          1:需要在TG 的 @wx_gif_bot 机器人处，输入/bind 命令获取你的ID,在上方输入框填写,来绑定tg,然后再到tg 的 @wx_gif_bot 发送表情.
-          2:我的表情最多显示最新的201条,需要新的请在tg上重新/send.
-          3:随机页面长按表情可以举报不合时宜的表情(大家都懂),举报后将被暂时屏蔽,我会尽可能快速恢复错误举报的表情,对经常上传不合时宜表情的用户予以封禁
+        0:所有页面都是下拉刷新，广告只在每天第一次打开显示，如果可以，请帮忙点一下，赚点服务钱的钱
+        1:单击表情后出现预览界面，然后长摁就能发送给好友，随机页面的表情，双击就能收藏到自己里面
+        2:自己的表情最多只能收藏201个（喂！很多好好吧，如果不够请反馈），如果你够耐心，能在随机页面刷出来的。
+        3:随机页面出现的不合时宜的表情，或者自己里面有不合时宜的表情，长按表情就能举报或者删除
+        4:需要自己用电报（margeleT）上传表情的，请添加 @wx_gif_bot 机器人，输入/bind 命令获取你的ID,在下方输入框填写,来绑定电报，我会对经常上传不合时宜表情的用户予以封禁（不知道你咋样想的）
         </text>
+        <input bindinput="Binput" value="{{ vinputTgID }}" type="number" title="TelegramID" mode="normal" placeholder="点击此处输入Tg ID" />
+        <button bind:tap="bindTg" type="info"  style='width:50%'>绑定</button>
+        
       </block>
+         <ad unit-id="adunit-d62fb7368a164588"></ad>
     </block>
   </view>
   <view wx:if="{{islogin}}"></view>

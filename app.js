@@ -30,7 +30,7 @@ App({
     wx.login({
       success: resp => {
         wx.request({
-          url: "https://wy.kar98k.club/wx/login?jscode=" + resp.code + "&nickName=" + nickName,
+          url: "https://wy2.kar98k.club:8888/wx/login?jscode=" + resp.code + "&nickName=" + nickName,
           method: "GET",
           success: function (res) {
             if (res.statusCode == 200) {
